@@ -4,7 +4,79 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>组32 郑州大学｜河南志愿决策</title>
-<link rel="stylesheet" href="assets/style.css">
+<style>
+
+:root{
+  color-scheme: light;
+  --bg:#f6f7f9; --panel:#ffffff; --ink:#17202a; --muted:#5e6a75; --line:#dfe4ea;
+  --accent:#0f766e; --accent-2:#8b5cf6; --soft:#eefaf7; --soft-2:#f4f0ff;
+  --g-strong:#dc2626; --g-mid:#ea580c; --g-soft:#ca8a04; --g-safe:#16a34a; --g-base:#2563eb; --g-na:#64748b;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}
+a{color:#075985;word-break:break-word}
+header.site-header{padding:32px min(5vw,64px) 20px;background:#fff;border-bottom:1px solid var(--line)}
+header.site-header h1{margin:0 0 8px;font-size:clamp(24px,3.5vw,38px);line-height:1.15}
+header.site-header .subtitle{max-width:980px;color:var(--muted);font-size:15px;margin:0}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:20px;max-width:1100px}
+.summary .card{border:1px solid var(--line);background:#fbfcfd;padding:14px 16px;border-radius:10px}
+.summary .card strong{display:block;font-size:12px;color:var(--muted);font-weight:600;margin-bottom:4px;letter-spacing:.02em}
+.summary .card span{font-size:16px;font-weight:600}
+.crumb{font-size:13px;color:var(--muted);margin-bottom:14px}
+.crumb a{color:var(--accent)}
+main{padding:22px min(5vw,64px) 48px;max-width:1180px;margin:0 auto}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 6px;font-size:12px}
+.legend span{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid var(--line);padding:3px 9px;border-radius:999px}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.table-wrap{width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0 18px;background:#fff}
+table{width:100%;min-width:760px;border-collapse:collapse}
+th,td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top;font-size:13px}
+th{position:sticky;top:0;background:#f8fafc;color:#26313d;z-index:1;font-weight:600}
+tr:last-child td{border-bottom:0}
+th:last-child,td:last-child{border-right:0}
+tr.clickable{cursor:pointer}
+tr.clickable:hover{background:#f0fdfa}
+tr.clickable:hover td{color:var(--accent)}
+.badge{display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:999px;font-size:11px;font-weight:700;white-space:nowrap}
+.g-strong{background:#fef2f2;color:var(--g-strong)}
+.g-mid{background:#fff7ed;color:var(--g-mid)}
+.g-soft{background:#fefce8;color:var(--g-soft)}
+.g-safe{background:#f0fdf4;color:var(--g-safe)}
+.g-base{background:#eff6ff;color:var(--g-base)}
+.g-na{background:#f8fafc;color:var(--g-na)}
+.zx-badge{background:var(--soft-2);color:var(--accent-2);margin-left:6px}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
+.toolbar input,.toolbar select{padding:7px 11px;border:1px solid var(--line);border-radius:8px;font-size:13px;background:#fff}
+.toolbar input{flex:1;min-width:160px}
+.toolbar label{font-size:12px;color:var(--muted)}
+.group-page{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 8px 26px rgba(15,23,42,.05)}
+.group-head{padding:20px 22px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fcfdfe,#fff)}
+.group-head h2{margin:0;font-size:22px}
+.group-head .meta{margin-top:8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.group-body{padding:22px}
+.group-body h2{font-size:18px;margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.group-body h2:first-child{margin-top:0}
+.group-body h3{font-size:16px;margin:18px 0 8px}
+.group-body p,.group-body li{font-size:14px}
+.group-body ul{padding-left:20px}
+.callout{background:var(--soft);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px}
+.footnote{color:var(--muted);font-size:12px!important;margin-top:18px}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.pager a{flex:1;padding:11px 16px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:13px;text-decoration:none;color:var(--ink);transition:.15s}
+.pager a:hover{border-color:var(--accent);color:var(--accent)}
+.pager a .dir{display:block;font-size:11px;color:var(--muted);margin-bottom:2px}
+.pager a.right{text-align:right}
+.section-title{font-size:20px;margin:30px 0 6px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
+.filter-active{color:var(--accent);font-weight:600}
+.proresearch{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px 26px;margin-top:26px}
+.proresearch h2{font-size:20px;margin:0 0 6px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:30px 20px;border-top:1px solid var(--line);background:#fff}
+@media(max-width:680px){
+  .pager{flex-direction:column}
+  .summary{grid-template-columns:1fr 1fr}
+}
+
+</style>
 </head>
 <body>
 <header class="site-header">
