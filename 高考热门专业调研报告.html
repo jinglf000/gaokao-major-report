@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考热门专业调研报告 · 11 个专业全景</title>
+<style>
+  :root{
+    --bg:#f5f7fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
+    --line:#e5e7eb; --primary:#1e3a8a; --primary-2:#2563eb;
+    --accent:#0d9488; --gold:#b45309; --rose:#be185d; --tag:#eef2ff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px;
+  }
+  /* 顶部封面 */
+  .hero{
+    background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 55%,#0d9488 130%);
+    color:#fff;padding:56px 24px 44px;text-align:center;
+  }
+  .hero h1{font-size:30px;font-weight:700;letter-spacing:1px;margin-bottom:10px}
+  .hero p{opacity:.88;font-size:15px}
+  .hero .meta{margin-top:14px;font-size:13px;opacity:.7}
+  /* 统计条 */
+  .stats{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:22px}
+  .stats span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+    padding:6px 14px;border-radius:20px;font-size:13px}
+  /* 导航 */
+  .nav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);
+    box-shadow:0 2px 8px rgba(0,0,0,.04);padding:10px 16px}
+  .nav-inner{max-width:1080px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  .nav a{text-decoration:none;color:var(--muted);font-size:13px;padding:5px 11px;border-radius:14px;
+    background:var(--tag);transition:.15s;white-space:nowrap}
+  .nav a:hover{color:#fff;background:var(--primary-2)}
+  .nav .grp{font-size:11px;color:var(--primary);font-weight:600;align-self:center;padding:0 4px}
+  /* 容器 */
+  .wrap{max-width:1080px;margin:0 auto;padding:30px 20px 60px}
+  .section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:28px;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,.03)}
+  .section h2{font-size:22px;display:flex;align-items:center;gap:12px;margin-bottom:4px}
+  .badge{display:inline-block;width:34px;height:34px;border-radius:9px;background:var(--primary);
+    color:#fff;text-align:center;line-height:34px;font-size:15px;font-weight:700;flex-shrink:0}
+  .category{color:var(--muted);font-size:13px;margin-bottom:18px;padding-left:46px}
+  .category code{background:var(--tag);color:var(--primary);padding:1px 7px;border-radius:4px;font-size:12px}
+  h3{font-size:16px;margin:22px 0 10px;color:var(--primary);border-left:4px solid var(--accent);
+    padding-left:10px}
+  .overview{color:#374151;background:#f8fafc;border-radius:8px;padding:12px 16px;font-size:14px}
+  /* 课程标签 */
+  .course-group{margin-bottom:14px}
+  .course-group .label{font-weight:600;font-size:13px;color:var(--gold);margin-bottom:6px}
+  .tags{display:flex;flex-wrap:wrap;gap:6px}
+  .tag{background:#fff;border:1px solid var(--line);border-radius:6px;padding:3px 9px;font-size:12.5px;color:#374151}
+  .tag.core{background:#fef3c7;border-color:#fde68a;color:#92400e}
+  .tag.basic{background:#dbeafe;border-color:#bfdbfe;color:#1e40af}
+  /* 排名表 */
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.5px}
+  th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:#f8fafc;color:var(--primary);font-weight:600;font-size:12.5px}
+  td.rank{font-weight:700;color:var(--primary)}
+  .grade{display:inline-block;min-width:30px;text-align:center;padding:1px 6px;border-radius:5px;
+    font-size:11.5px;font-weight:600}
+  .g-aplus{background:#dc2626;color:#fff}
+  .g-a{background:#ea580c;color:#fff}
+  .g-aminus{background:#ca8a04;color:#fff}
+  .g-bplus{background:#0891b2;color:#fff}
+  .rank-source{font-size:12px;color:var(--muted);margin-bottom:6px}
+  .rank-source b{color:var(--primary)}
+  /* 就业 */
+  .jobs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:8px 0}
+  .job{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 12px}
+  .job .t{font-weight:600;color:#166534;font-size:13.5px;margin-bottom:2px}
+  .job .d{font-size:12.5px;color:#15803d}
+  .salary{background:#fffbeb;border:1px solid #fde68a;color:#92400e;border-radius:8px;
+    padding:10px 14px;font-size:13.5px;margin-top:10px}
+  .salary b{color:#b45309}
+  .companies{margin-top:6px;font-size:13px;color:#374151}
+  .companies b{color:var(--ink)}
+  /* 来源/免责 */
+  .source-box{background:#fef9c3;border:1px solid #fde047;border-radius:10px;padding:16px 18px;margin:24px 0}
+  .source-box h4{color:#854d0e;margin-bottom:8px;font-size:14px}
+  .source-box ul{list-style:none;font-size:12.5px;color:#713f12}
+  .source-box li{padding:2px 0}
+  .source-box a{color:#1d4ed8;text-decoration:none}
+  .source-box a:hover{text-decoration:underline}
+  .disclaimer{background:#fee2e2;border:1px solid #fecaca;border-radius:8px;padding:12px 16px;
+    font-size:12.5px;color:#991b1b;margin-top:18px}
+  /* 目录卡 */
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:24px}
+  .toc h2{font-size:18px;margin-bottom:14px;color:var(--primary)}
+  .toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+  .toc-item{text-decoration:none;color:var(--ink);padding:12px 14px;border:1px solid var(--line);
+    border-radius:9px;font-size:13.5px;display:flex;gap:10px;align-items:center;transition:.15s}
+  .toc-item:hover{border-color:var(--primary-2);background:var(--tag)}
+  .toc-item .n{color:var(--primary);font-weight:700;font-size:12px}
+  .cat-pill{font-size:11px;padding:2px 8px;border-radius:10px;color:#fff}
+  .cat-eng{background:#1e40af}.cat-info{background:#0891b2}.cat-med{background:#0d9488}
+  .cat-biz{background:#b45309}.cat-law{background:#be185d}
+  @media(max-width:640px){.hero h1{font-size:22px}.section{padding:18px}.nav{padding:8px}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>高考热门专业调研报告</h1>
+  <p>11 个本科专业 · 课程体系 · 全国排名 · 就业前景</p>
+  <div class="stats">
+    <span>📚 11 个专业</span>
+    <span>🏆 三源排名（软科 / 教育部 / QS）</span>
+    <span>💼 Top 院校 + 用人单位</span>
+    <span>📅 2026 年 6 月编制</span>
+  </div>
+  <div class="meta">数据来源：软科中国大学专业排名、教育部学位中心学科评估、QS 世界大学学科排名、麦可思《中国大学生就业报告》</div>
+</div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="grp">工科</span>
+    <a href="#m1">电气工程</a>
+    <a href="#m2">机械制造</a>
+    <a href="#m3">自动化</a>
+    <span class="grp">信息技术</span>
+    <a href="#m4">计算机</a>
+    <a href="#m5">人工智能</a>
+    <a href="#m6">数字媒体</a>
+    <a href="#m7">电子商务</a>
+    <span class="grp">医学</span>
+    <a href="#m8">临床医学</a>
+    <a href="#m9">口腔医学</a>
+    <a href="#m10">动物医学</a>
+    <span class="grp">人文社科</span>
+    <a href="#m11">法学</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- 目录 -->
+  <div class="toc">
+    <h2>📑 目录 · 专业速览</h2>
+    <div class="toc-grid">
+      <a class="toc-item" href="#m1"><span class="n">01</span><span><span class="cat-pill cat-eng">工科</span> 电气工程及其自动化</span></a>
+      <a class="toc-item" href="#m2"><span class="n">02</span><span><span class="cat-pill cat-eng">工科</span> 机械设计制造及其自动化</span></a>
+      <a class="toc-item" href="#m3"><span class="n">03</span><span><span class="cat-pill cat-eng">工科</span> 自动化</span></a>
+      <a class="toc-item" href="#m4"><span class="n">04</span><span><span class="cat-pill cat-info">信息</span> 计算机科学与技术</span></a>
+      <a class="toc-item" href="#m5"><span class="n">05</span><span><span class="cat-pill cat-info">信息</span> 人工智能</span></a>
+      <a class="toc-item" href="#m6"><span class="n">06</span><span><span class="cat-pill cat-info">信息</span> 数字媒体技术</span></a>
+      <a class="toc-item" href="#m7"><span class="n">07</span><span><span class="cat-pill cat-biz">商科</span> 电子商务</span></a>
+      <a class="toc-item" href="#m8"><span class="n">08</span><span><span class="cat-pill cat-med">医学</span> 临床医学</span></a>
+      <a class="toc-item" href="#m9"><span class="n">09</span><span><span class="cat-pill cat-med">医学</span> 口腔医学</span></a>
+      <a class="toc-item" href="#m10"><span class="n">10</span><span><span class="cat-pill cat-med">医学</span> 动物医学</span></a>
+      <a class="toc-item" href="#m11"><span class="n">11</span><span><span class="cat-pill cat-law">法学</span> 法学</span></a>
+    </div>
+  </div>
+
+  <!-- 1. 电气工程及其自动化 -->
+  <div class="section" id="m1">
+    <h2><span class="badge">01</span> 电气工程及其自动化</h2>
+    <p class="category">工学门类 / 电气类 / 代码 080601 · <code>所属一级学科：电气工程</code></p>
+    <p class="overview">研究电能的产生、传输、变换、控制与应用，是现代工业与能源体系的基石。强电与弱电结合、软件与硬件结合，俗称"工科万金油"，国民经济基础产业专业。</p>
+
+    <h3>📚 课程体系</h3>
+    <div class="course-group">
+      <div class="label">基础课（公共基础 + 学科基础）</div>
+      <div class="tags">
+        <span class="tag basic">高等数学</span><span class="tag basic">线性代数</span><span class="tag basic">概率论</span>
+        <span class="tag basic">大学物理</span><span class="tag basic">复变函数与积分变换</span><span class="tag basic">电路原理</span>
+        <span class="tag basic">模拟电子技术</span><span class="tag basic">数字电子技术</span><span class="tag basic">工程电磁场</span>
+        <span class="tag basic">C 语言程序设计</span><span class="tag basic">工程力学</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">专业核心课</div>
+      <div class="tags">
+        <span class="tag core">电机学</span><span class="tag core">电力电子技术</span><span class="tag core">电力系统分析</span>
+        <span class="tag core">电力系统继电保护</span><span class="tag core">高电压技术</span><span class="tag core">自动控制原理</span>
+        <span class="tag core">信号与系统</span><span class="tag core">电力拖动与控制系统</span><span class="tag core">发电厂电气部分</span>
+        <span class="tag core">电力系统自动化</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">方向课：电力系统 / 电力电子与电力传动 / 高电压 / 电机电器 / 新能源</div>
+    </div>
+
+    <h3>🏆 全国排名</h3>
+    <div class="rank-source"><b>① 软科 2024 中国大学专业排名</b> · Top 代表院校（电气工程及其自动化）</div>
+    <table>
+      <tr><th>排名</th><th>院校</th><th>地区</th><th>优势</th></tr>
+      <tr><td class="rank">1</td><td>清华大学</td><td>北京</td><td>电气"二王四A"之首</td></tr>
+      <tr><td class="rank">2</td><td>华中科技大学</td><td>湖北</td><td>强电重镇，电网输送大户</td></tr>
+      <tr><td class="rank">3</td><td>西安交通大学</td><td>陕西</td><td>西交电气老牌强校</td></tr>
+      <tr><td class="rank">4</td><td>华北电力大学</td><td>北京/保定</td><td>"电力黄埔"，电网嫡系</td></tr>
+      <tr><td class="rank">5</td><td>浙江大学</td><td>浙江</td><td>电力电子国内顶尖</td></tr>
+      <tr><td>6-10</td><td>哈尔滨工业大学、重庆大学、上海交通大学、西南交通大学、武汉大学</td><td>—</td><td>A/B+ 梯队</td></tr>
+    </table>
+    <div class="rank-source" style="margin-top:14px"><b>② 教育部学科评估</b>（电气工程）· 第五轮 A 档院校</div>
+    <table>
+      <tr><th>评级</th><th>院校</th></tr>
+      <tr><td><span class="grade g-aplus">A+</span></td><td>清华大学、华中科技大学、西安交通大学</td></tr>
+      <tr><td><span class="grade g-a">A</span></td><td>浙江大学、华北电力大学、重庆大学、上海交通大学</td></tr>
+      <tr><td><span class="grade g-aminus">A-</span></td><td>哈尔滨工业大学、西南交通大学、湖南大学、武汉大学、海军工程大学</td></tr>
+    </table>
+    <div class="rank-source" style="margin-top:14px"><b>③ QS 世界大学学科排名</b>（Engineering - Electrical & Electronic）· 中国大陆前列：清华大学、北京大学、上海交通大学、浙江大学、复旦大学。</div>
+
+    <h3>💼 就业前景</h3>
+    <div class="jobs">
+      <div class="job"><div class="t">⚡ 电力系统</div><div class="d">国家电网、南方电网、发电集团（运维/调度/规划）</div></div>
+      <div class="job"><div class="t">🏭 装备制造</div><div class="d">电气设备研发、电力电子、电机驱动设计</div></div>
+      <div class="job"><div class="t">🚗 新能源/汽车</div><div class="d">新能源汽车电控、光伏储能、风电</div></div>
+      <div class="job"><div class="t">🏢 建筑/设计院</div><div class="d">供配电设计、轨道交通供电</div></div>
+    </div>
+    <p class="companies"><b>代表性用人单位：</b>国家电网（世界 500 强第 3）、南方电网、华能/大唐/华电/国能/国电投五大发电集团、华为（数字能源）、比亚迪、阳光电源、特变电工、上海电气、东方电气、西门子、ABB、施耐德电气。</p>
+    <div class="salary">💰 <b>薪资水平：</b>国家电网应届 12–18 万/年（区域差异大）；新能源/电力电子民企研发岗 15–30 万/年，头部企业（华为数字能源等）可达 25–40 万。整体就业率长期居工科前列。<small>（来源：麦可思就业蓝皮书，下同）</small></div>
+  </div>
+
+  <!-- 2. 机械设计制造及其自动化 -->
+  <div class="section" id="m2">
+    <h2><span class="badge">02</span> 机械设计制造及其自动化</h2>
+    <p class="category">工学门类 / 机械类 / 代码 080202 · <code>所属一级学科：机械工程</code></p>
+    <p class="overview">研究机械产品的设计、制造、控制与装备，是制造业的"母专业"。融合机械、电子、控制、计算机，是智能制造、机器人、航空航天的人才摇篮。</p>
+
+    <h3>📚 课程体系</h3>
+    <div class="course-group">
+      <div class="label">基础课</div>
+      <div class="tags">
+        <span class="tag basic">高等数学</span><span class="tag basic">大学物理</span><span class="tag basic">理论力学</span>
+        <span class="tag basic">材料力学</span><span class="tag basic">工程图学（画法几何+CAD）</span><span class="tag basic">线性代数</span>
+        <span class="tag basic">概率论</span><span class="tag basic">C 语言</span><span class="tag basic">电工电子技术</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">专业核心课</div>
+      <div class="tags">
+        <span class="tag core">机械原理</span><span class="tag core">机械设计</span><span class="tag core">机械制造技术基础</span>
+        <span class="tag core">控制工程基础</span><span class="tag core">工程材料</span><span class="tag core">公差与测量技术</span>
+        <span class="tag core">数控技术</span><span class="tag core">液压与气压传动</span><span class="tag core">机电传动控制</span>
+        <span class="tag core">机械制造装备设计</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">方向课：机械设计 / 机械制造 / 机电一体化 / 智能制造 / 车辆工程</div>
+    </div>
+
+    <h3>🏆 全国排名</h3>
+    <div class="rank-source"><b>① 软科 2024 专业排名</b> · 机械设计制造及其自动化 代表院校</div>
+    <table>
+      <tr><th>排名</th><th>院校</th><th>优势</th></tr>
+      <tr><td class="rank">1</td><td>华中科技大学</td><td>机械"四小龙"之首，制造装备强</td></tr>
+      <tr><td class="rank">2</td><td>清华大学</td><td>精密仪器与机械顶尖</td></tr>
+      <tr><td class="rank">3</td><td>西安交通大学</td><td>老牌机械强校</td></tr>
+      <tr><td class="rank">4</td><td>上海交通大学</td><td>机电控制、机器人</td></tr>
+      <tr><td class="rank">5</td><td>哈尔滨工业大学</td><td>航天机械、机器人</td></tr>
+      <tr><td>6-10</td><td>北京航空航天大学、浙江大学、西北工业大学、大连理工大学、吉林大学</td><td>—</td></tr>
+    </table>
+    <div class="rank-source" style="margin-top:14px"><b>② 教育部学科评估</b>（机械工程）· 第五轮 A 档院校</div>
+    <table>
+      <tr><th>评级</th><th>院校</th></tr>
+      <tr><td><span class="grade g-aplus">A+</span></td><td>清华大学、哈尔滨工业大学、上海交通大学、华中科技大学</td></tr>
+      <tr><td><span class="grade g-a">A</span></td><td>北京航空航天大学、吉林大学、西安交通大学、燕山大学（双非黑马）</td></tr>
+      <tr><td><span class="grade g-aminus">A-</span></td><td>浙江大学、北京理工大学、大连理工大学、西北工业大学、天津大学等</td></tr>
+    </table>
+    <div class="rank-source" style="margin-top:14px"><b>③ QS 学科排名</b>（Engineering - Mechanical）· 中国大陆前列：清华大学、上海交通大学、北京大学、浙江大学、哈尔滨工业大学。</div>
+
+    <h3>💼 就业前景</h3>
+    <div class="jobs">
+      <div class="job"><div class="t">🤖 智能制造/机器人</div><div class="d">工业机器人、自动化产线研发</div></div>
+      <div class="job"><div class="t">🚗 汽车/新能源车</div><div class="d">整车设计、动力总成、底盘</div></div>
+      <div class="job"><div class="t">🚀 航空航天/军工</div><div class="d">飞行器结构、装备制造</div></div>
+      <div class="job"><div class="t">⚙️ 高端装备</div><div class="d">机床、半导体设备、重工机械</div></div>
+    </div>
+    <p class="companies"><b>代表性用人单位：</b>比亚迪、三一重工、徐工集团、中联重科、上汽/一汽/广汽、华为（结构与硬件）、大疆、新松机器人、埃斯顿、沈阳机床、中国商飞、中航工业、航天科技/科工集团、西门子、博世。</p>
+    <div class="salary">💰 <b>薪资水平：</b>传统机械制造起薪 8–14 万/年；转向新能源车、机器人、半导体设备后明显提升，头部企业研发岗 15–25 万/年；整体起薪中游，但行业面极广、就业率稳定（约 92%）。</div>
+  </div>
+
+  <!-- 3. 自动化 -->
+  <div class="section" id="m3">
+    <h2><span class="badge">03</span> 自动化</h2>
+    <p class="category">工学门类 / 自动化类 / 代码 080801 · <code>所属一级学科：控制科学与工程</code></p>
+    <p class="overview">研究系统自动控制、检测与信息处理，是"软硬兼施"的交叉学科。万金油专业，涵盖工业控制、机器人、人工智能、航空航天控制，口径极宽。</p>
+
+    <h3>📚 课程体系</h3>
+    <div class="course-group">
+      <div class="label">基础课</div>
+      <div class="tags">
+        <span class="tag basic">高等数学</span><span class="tag basic">线性代数</span><span class="tag basic">概率论</span>
+        <span class="tag basic">复变函数与积分变换</span><span class="tag basic">大学物理</span><span class="tag basic">电路原理</span>
+        <span class="tag basic">模拟/数字电子技术</span><span class="tag basic">C/C++ 程序设计</span><span class="tag basic">工程数学</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">专业核心课</div>
+      <div class="tags">
+        <span class="tag core">自动控制原理（经典+现代）</span><span class="tag core">信号与系统</span><span class="tag core">微机原理与接口技术</span>
+        <span class="tag core">传感器与检测技术</span><span class="tag core">电机与拖动</span><span class="tag core">电力电子技术</span>
+        <span class="tag core">计算机控制技术</span><span class="tag core">过程控制</span><span class="tag core">运动控制</span>
+        <span class="tag core">模式识别/人工智能导论</span><span class="tag core">PLC 原理</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">方向课：运动控制 / 过程控制 / 智能控制与机器人 / 模式识别与智能系统 / 导航制导</div>
+    </div>
+
+    <h3>🏆 全国排名</h3>
+    <div class="rank-source"><b>① 软科 2024 专业排名</b> · 自动化 代表院校</div>
+    <table>
+      <tr><th>排名</th><th>院校</th><th>优势</th></tr>
+      <tr><td class="rank">1</td><td>清华大学</td><td>控制学科国内顶尖</td></tr>
+      <tr><td class="rank">2</td><td>浙江大学</td><td>工业控制、机器人</td></tr>
+      <tr><td class="rank">3</td><td>哈尔滨工业大学</td><td>航天控制、机器人</td></tr>
+      <tr><td class="rank">4</td><td>北京航空航天大学</td><td>导航制导、无人系统</td></tr>
+      <tr><td class="rank">5</td><td>东北大学</td><td>自动化传统强校</td></tr>
+      <tr><td>6-10</td><td>上海交通大学、华中科技大学、西安交通大学、东南大学、北京理工大学</td><td>—</td></tr>
+    </table>
+    <div class="rank-source" style="margin-top:14px"><b>② 教育部学科评估</b>（控制科学与工程）· 第五轮 A 档院校</div>
+    <table>
+      <tr><th>评级</th><th>院校</th></tr>
+      <tr><td><span class="grade g-aplus">A+</span></td><td>清华大学、哈尔滨工业大学、浙江大学、北京航空航天大学</td></tr>
+      <tr><td><span class="grade g-a">A</span></td><td>北京理工大学、东北大学、上海交通大学、华中科技大学、西安交通大学、国防科技大学</td></tr>
+      <tr><td><span class="grade g-aminus">A-</span></td><td>东南大学、山东大学、华东理工大学、中南大学、哈尔滨工程大学等</td></tr>
+    </table>
+    <div class="rank-source" style="margin-top:14px"><b>③ QS 学科排名</b>（Engineering - Electrical & Electronic / Control）· 中国大陆前列：清华大学、浙江大学、上海交通大学、哈尔滨工业大学、北京大学。</div>
+
+    <h3>💼 就业前景</h3>
+    <div class="jobs">
+      <div class="job"><div class="t">🏭 工业自动化</div><div class="d">PLC、DCS、过程控制工程师</div></div>
+      <div class="job"><div class="t">🤖 机器人/智能装备</div><div class="d">运动控制、伺服系统研发</div></div>
+      <div class="job"><div class="t">🚀 航天/国防</div><div class="d">制导导航、飞行控制</div></div>
+      <div class="job"><div class="t">💻 互联网/智能硬件</div><div class="d">算法、嵌入式、自动驾驶</div></div>
+    </div>
+    <p class="companies"><b>代表性用人单位：</b>华为、大疆、比亚迪、海康威视、汇川技术、新松机器人、埃斯顿、新时达、中车集团、航天科技/科工、中国电科（CETC）、国家电网、西门子、ABB、发那科（FANUC）、库卡（KUKA）。</p>
+    <div class="salary">💰 <b>薪资水平：</b>传统工控 9–15 万/年；转向机器人、自动驾驶、芯片后起薪跃升，头部企业 18–35 万/年。自动化因口径宽，转行计算机/算法的比例高，整体收入潜力强。</div>
+  </div>
+
+  <!-- 4. 计算机科学与技术 -->
+  <div class="section" id="m4">
+    <h2><span class="badge">04</span> 计算机科学与技术</h2>
+    <p class="category">工学门类 / 计算机类 / 代码 080901 · <code>所属一级学科：计算机科学与技术</code></p>
+    <p class="overview">计算机系统的硬件、软件、理论与应用综合学科，IT 时代的核心专业。覆盖算法、系统、网络、数据库、人工智能，就业面最广、薪资最高的工科专业之一。</p>
+
+    <h3>📚 课程体系</h3>
+    <div class="course-group">
+      <div class="label">基础课</div>
+      <div class="tags">
+        <span class="tag basic">高等数学</span><span class="tag basic">线性代数</span><span class="tag basic">离散数学</span>
+        <span class="tag basic">概率论与数理统计</span><span class="tag basic">大学物理</span><span class="tag basic">数字逻辑</span>
+        <span class="tag basic">C/C++ 程序设计</span><span class="tag basic">电路与电子学</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">专业核心课</div>
+      <div class="tags">
+        <span class="tag core">数据结构</span><span class="tag core">算法设计与分析</span><span class="tag core">计算机组成原理</span>
+        <span class="tag core">操作系统</span><span class="tag core">计算机网络</span><span class="tag core">数据库系统</span>
+        <span class="tag core">编译原理</span><span class="tag core">软件工程</span><span class="tag core">面向对象程序设计（Java/Python）</span>
+        <span class="tag core">计算机体系结构</span><span class="tag core">人工智能</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">方向课：软件工程 / 人工智能 / 网络安全 / 大数据 / 系统与底层 / 前沿交叉</div>
+    </div>
+
+    <h3>🏆 全国排名</h3>
+    <div class="rank-source"><b>① 软科 2024 专业排名</b> · 计算机科学与技术 Top 院校</div>
+    <table>
+      <tr><th>排名</th><th>院校</th><th>优势</th></tr>
+      <tr><td class="rank">1</td><td>清华大学</td><td>计算机"四强"之首</td></tr>
+      <tr><td class="rank">2</td><td>北京大学</td><td>理论、图灵班</td></tr>
+      <tr><td class="rank">3</td><td>浙江大学</td><td>人工智能、工业落地</td></tr>
+      <tr><td class="rank">4</td><td>哈尔滨工业大学</td><td>体系结构、应用</td></tr>
+      <tr><td class="rank">5</td><td>国防科技大学</td><td>高性能计算（天河）</td></tr>
+      <tr><td>6-10</td><td>上海交通大学、南京大学、北京航空航天大学、华中科技大学、电子科技大学</td><td>—</td></tr>
+    </table>
+    <div class="rank-source" style="margin-top:14px"><b>② 教育部学科评估</b>（计算机科学与技术）· 第五轮 A 档院校（A+ 扩至 8 所）</div>
+    <table>
+      <tr><th>评级</th><th>院校</th></tr>
+      <tr><td><span class="grade g-aplus">A+</span></td><td>北京大学、清华大学、浙江大学、国防科技大学（传统四强）+ 北京航空航天大学、南京大学、上海交通大学、西北工业大学（新晋）</td></tr>
+      <tr><td><span class="grade g-a">A</span></td><td>哈尔滨工业大学、华中科技大学、电子科技大学、北京邮电大学、北京理工大学等</td></tr>
+      <tr><td><span class="grade g-aminus">A-</span></td><td>西安交通大学、武汉大学、同济大学、中山大学、西安电子科技大学等</td></tr>
+    </table>
+    <div class="rank-source" style="margin-top:14px"><b>③ QS 学科排名</b>（Computer Science）· 中国大陆前列：清华大学（全球前 10）、北京大学、上海交通大学、浙江大学、复旦大学、哈尔滨工业大学。</div>
+
+    <h3>💼 就业前景</h3>
+    <div class="jobs">
+      <div class="job"><div class="t">💻 软件开发</div><div class="d">后端/前端/移动端工程师</div></div>
+      <div class="job"><div class="t">🧠 人工智能/算法</div><div class="d">机器学习、大模型、推荐算法</div></div>
+      <div class="job"><div class="t">🔐 网络安全</div><div class="d">安全攻防、数据安全</div></div>
+      <div class="job"><div class="t">🗄️ 数据/云计算</div><div class="d">大数据、云平台、运维开发</div></div>
+      <div class="job"><div class="t">🎮 互联网产品</div><div class="d">游戏、金融科技、电商</div></div>
+    </div>
+    <p class="companies"><b>代表性用人单位：</b>华为、腾讯、阿里巴巴、字节跳动、百度、美团、京东、网易、拼多多、微软（中国）、谷歌、苹果、大疆、海康威视、中兴、各商业银行/券商科技子公司、三大运营商。</p>
+    <div class="salary">💰 <b>薪资水平：</b>连续多年居本科绿牌专业前列。2024 届互联网大厂研发 SP/SSP 年薪 30–50 万+；普通本科起薪 12–20 万/年。计算机类专业月收入长期居各专业榜首（约 7000–8000 元/月起薪，名校及一线翻倍）。</div>
+  </div>
+
+  <!-- 5. 人工智能 -->
+  <div class="section" id="m5">
+    <h2><span class="badge">05</span> 人工智能</h2>
+    <p class="category">工学门类 / 计算机类 / 代码 080717T · <code>2018 年新设专业 · 对应一级学科：计算机科学与技术 / 人工智能</code></p>
+    <p class="overview">聚焦机器学习、深度学习、计算机视觉、自然语言处理等 AI 核心技术的交叉学科。伴随大模型浪潮，是当下最炙手可热、薪资最高的新兴专业之一。</p>
+
+    <h3>📚 课程体系</h3>
+    <div class="course-group">
+      <div class="label">基础课</div>
+      <div class="tags">
+        <span class="tag basic">高等数学</span><span class="tag basic">线性代数</span><span class="tag basic">概率论与数理统计</span>
+        <span class="tag basic">离散数学</span><span class="tag basic">最优化方法</span><span class="tag basic">Python 程序设计</span>
+        <span class="tag basic">数据结构与算法</span><span class="tag basic">计算机组成原理</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">专业核心课</div>
+      <div class="tags">
+        <span class="tag core">机器学习</span><span class="tag core">深度学习</span><span class="tag core">人工智能导论</span>
+        <span class="tag core">模式识别</span><span class="tag core">计算机视觉</span><span class="tag core">自然语言处理</span>
+        <span class="tag core">神经网络</span><span class="tag core">强化学习</span><span class="tag core">知识图谱</span>
+        <span class="tag core">大数据技术</span><span class="tag core">机器人学</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">方向课：计算机视觉 / 自然语言处理与大模型 / 智能语音 / 智能机器人 / 自动驾驶</div>
+    </div>
+
+    <h3>🏆 全国排名</h3>
+    <div class="rank-source"><b>① 软科 2024 专业排名</b> · 人工智能 Top 院校（总分参考）</div>
+    <table>
+      <tr><th>排名</th><th>院校</th><th>总分</th></tr>
+      <tr><td class="rank">1</td><td>清华大学</td><td>61.7</td></tr>
+      <tr><td class="rank">2</td><td>上海交通大学</td><td>61.7</td></tr>
+      <tr><td class="rank">3</td><td>南京大学</td><td>58.9</td></tr>
+      <tr><td class="rank">4</td><td>西安电子科技大学</td><td>58.5</td></tr>
+      <tr><td class="rank">5</td><td>浙江大学</td><td>58.2</td></tr>
+      <tr><td>6-10</td><td>北京大学、华中科技大学、北京航空航天大学、哈尔滨工业大学、中国科学技术大学</td><td>—</td></tr>
+    </table>
+    <div class="rank-source" style="margin-top:14px"><b>② 教育部学科评估</b>（人工智能为独立一级学科 / 同时参考计算机科学与技术）</div>
+    <table>
+      <tr><th>说明</th><th>院校</th></tr>
+      <tr><td><span class="grade g-aplus">A+</span></td><td>清华、北大、浙大、国防科大、上交、南大、北航、西工大（计算机 A+ 院校，AI 研究实力顶尖）</td></tr>
+      <tr><td><span class="grade g-a">A</span></td><td>中科院自动化所（科研）、哈工大、华中科大、电子科大、西安电子科大</td></tr>
+    </table>
+    <p style="font-size:12px;color:var(--muted);margin-top:6px">注：2022 年教育部新增"人工智能"为独立一级学科（学科代码 0810），第五轮起单独评估，但完整结果官方未全面公开。南京大学设有国内首个人工智能学院（周志华教授领衔）。</p>
+    <div class="rank-source" style="margin-top:14px"><b>③ QS 学科排名</b>（Data Science & AI / Computer Science）· 中国大陆前列：清华大学、北京大学、上海交通大学、浙江大学、复旦大学。</div>
+
+    <h3>💼 就业前景</h3>
+    <div class="jobs">
+      <div class="job"><div class="t">🤖 算法工程师</div><div class="d">CV/NLP/推荐/大模型方向</div></div>
+      <div class="job"><div class="t">🚗 自动驾驶</div><div class="d">感知、决策、规控算法</div></div>
+      <div class="job"><div class="t">🎙️ 智能语音/AIGC</div><div class="d">大模型、生成式 AI 应用</div></div>
+      <div class="job"><div class="t">🦾 智能机器人</div><div class="d">具身智能、人形机器人</div></div>
+      <div class="job"><div class="t">🔬 科研/教培</div><div class="d">高校、研究院所、深造率高</div></div>
+    </div>
+    <p class="companies"><b>代表性用人单位：</b>字节跳动、阿里巴巴、腾讯、百度、华为（昇腾/盘古）、商汤、旷视、智谱 AI、月之暗面、DeepSeek、科大讯飞、地平线、小马智行、大疆、OpenAI/微软亚洲研究院、中科院自动化所。</p>
+    <div class="salary">💰 <b>薪资水平：</b>2024–2026 年 AI 算法岗为薪资天花板。名校硕士 AI 算法岗校招年薪普遍 40–80 万，顶尖 SP/天才少年可达百万级；本科生略低但仍处全专业顶端。AI 相关岗位需求增速持续领跑全行业。</div>
+  </div>
+
+  <!-- 6. 数字媒体技术 -->
+  <div class="section" id="m6">
+    <h2><span class="badge">06</span> 数字媒体技术</h2>
+    <p class="category">工学门类 / 计算机类 / 代码 080906 · <code>所属一级学科：计算机科学与技术（偏技术，非艺术类）</code></p>
+    <p class="overview">融合计算机技术与数字内容的交叉专业，研究游戏、VR/AR、多媒体、数字音视频、虚拟现实的技术实现。<b>注意区分</b>：数字媒体"技术"（工学，写代码）≠ 数字媒体"艺术"（艺术学，做设计）。</p>
+
+    <h3>📚 课程体系</h3>
+    <div class="course-group">
+      <div class="label">基础课</div>
+      <div class="tags">
+        <span class="tag basic">高等数学</span><span class="tag basic">线性代数</span><span class="tag basic">C/C++ 程序设计</span>
+        <span class="tag basic">数据结构</span><span class="tag basic">计算机图形学基础</span><span class="tag basic">数字图像处理</span>
+        <span class="tag basic">色彩与视觉</span><span class="tag basic">素描与造型（入门）</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">专业核心课</div>
+      <div class="tags">
+        <span class="tag core">计算机图形学</span><span class="tag core">游戏引擎与开发（Unity/Unreal）</span><span class="tag core">虚拟现实（VR/AR）技术</span>
+        <span class="tag core">三维建模与动画</span><span class="tag core">数字音视频处理</span><span class="tag core">人机交互技术</span>
+        <span class="tag core">多媒体技术</span><span class="tag core">Web 前端开发</span><span class="tag core">移动应用开发</span>
+        <span class="tag core">计算机视觉</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">方向课：游戏开发 / VR·AR / 数字影音 / 交互媒体 / 影视特效</div>
+    </div>
+
+    <h3>🏆 全国排名</h3>
+    <div class="rank-source"><b>① 软科 2024 专业排名</b> · 数字媒体技术 Top 代表院校</div>
+    <table>
+      <tr><th>排名</th><th>院校</th><th>优势</th></tr>
+      <tr><td class="rank">1</td><td>浙江大学</td><td>CAD&CG 全国重点实验室，游戏/图形学顶尖</td></tr>
+      <tr><td class="rank">2</td><td>清华大学</td><td>计算机背景强</td></tr>
+      <tr><td class="rank">3</td><td>北京邮电大学</td><td>数字媒体老牌强校</td></tr>
+      <tr><td class="rank">4</td><td>北京大学</td><td>图形学、智能交互</td></tr>
+      <tr><td class="rank">5</td><td>哈尔滨工业大学</td><td>多媒体、VR</td></tr>
+      <tr><td>6-10</td><td>华中科技大学、上海交通大学、大连理工大学、北京交通大学、电子科技大学</td><td>—</td></tr>
+    </table>
+    <div class="rank-source" style="margin-top:14px"><b>② 教育部学科评估</b>（对应计算机科学与技术，A 档院校同计算机专业，不再赘述；该专业强弱高度依赖学校计算机学科实力）。</div>
+    <div class="rank-source" style="margin-top:14px"><b>③ QS 学科排名</b>：参考计算机与数据科学排名，中国大陆前列同计算机专业。中国传媒大学、北京电影学院虽偏艺术类但在数字媒体领域声誉极高。</div>
+
+    <h3>💼 就业前景</h3>
+    <div class="jobs">
+      <div class="job"><div class="t">🎮 游戏开发</div><div class="d">客户端/引擎/3D 美术程序</div></div>
+      <div class="job"><div class="t">🥽 VR/AR/元宇宙</div><div class="d">虚拟现实、混合现实研发</div></div>
+      <div class="job"><div class="t">🎬 影视/动画特效</div><div class="d">数字内容、后期技术</div></div>
+      <div class="job"><div class="t">📱 互联网前端</div><div class="d">Web/移动端、交互开发</div></div>
+    </div>
+    <p class="companies"><b>代表性用人单位：</b>腾讯游戏、网易游戏、米哈游、莉莉丝、完美世界、鹰角、字节跳动（朝夕光年）、Unity 中国、Epic Games、哔哩哔哩、爱奇艺、Meta（Oculus）、迪士尼、各大影视特效公司。</p>
+    <div class="salary">💰 <b>薪资水平：</b>游戏行业为薪资第一梯队，头部游戏公司校招年薪 25–50 万（米哈游、网易等 SP 更高）；普通互联网前端岗 12–22 万/年。游戏/数字内容行业近年波动较大，但顶尖岗位回报丰厚。</div>
+  </div>
+
+  <!-- 7. 电子商务 -->
+  <div class="section" id="m7">
+    <h2><span class="badge">07</span> 电子商务</h2>
+    <p class="category">管理学门类 / 电子商务类 / 代码 120801 · <code>对应一级学科：管理科学与工程 / 工商管理</code></p>
+    <p class="overview">融合管理学、经济学、计算机与数据分析的交叉专业，培养电商运营、网络营销、数据分析、跨境电商复合人才。中国电商产业全球领先，专业对口性极强。</p>
+
+    <h3>📚 课程体系</h3>
+    <div class="course-group">
+      <div class="label">基础课</div>
+      <div class="tags">
+        <span class="tag basic">高等数学</span><span class="tag basic">线性代数</span><span class="tag basic">管理学原理</span>
+        <span class="tag basic">微观/宏观经济学</span><span class="tag basic">统计学</span><span class="tag basic">会计学</span>
+        <span class="tag basic">市场营销学</span><span class="tag basic">Python/数据库基础</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">专业核心课</div>
+      <div class="tags">
+        <span class="tag core">电子商务概论</span><span class="tag core">网络营销</span><span class="tag core">电子商务物流管理</span>
+        <span class="tag core">供应链管理</span><span class="tag core">电子商务数据分析</span><span class="tag core">消费者行为学</span>
+        <span class="tag core">跨境电商</span><span class="tag core">电子商务法律与法规</span><span class="tag core">网店运营与管理</span>
+        <span class="tag core">新媒体营销</span><span class="tag core">客户关系管理</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">方向课：电商运营 / 跨境电商 / 数据分析 / 网络营销（新媒体）/ 供应链与物流</div>
+    </div>
+
+    <h3>🏆 全国排名</h3>
+    <div class="rank-source"><b>① 软科 2024 专业排名</b> · 电子商务 Top 代表院校</div>
+    <table>
+      <tr><th>排名</th><th>院校</th><th>优势</th></tr>
+      <tr><td class="rank">1</td><td>杭州电子科技大学</td><td>地处杭州，阿里产学研紧密</td></tr>
+      <tr><td class="rank">2</td><td>武汉大学</td><td>综合性强校</td></tr>
+      <tr><td class="rank">3</td><td>对外经济贸易大学</td><td>国际商务、跨境电商</td></tr>
+      <tr><td class="rank">4</td><td>暨南大学</td><td>华南电商、跨境贸易</td></tr>
+      <tr><td class="rank">5</td><td>南京大学</td><td>—</td></tr>
+      <tr><td>6-10</td><td>上海财经大学、湖南大学、天津大学、华侨大学、上海理工大学</td><td>—</td></tr>
+    </table>
+    <div class="rank-source" style="margin-top:14px"><b>② 教育部学科评估</b>（对应"管理科学与工程"与"工商管理"）· A 档代表院校</div>
+    <table>
+      <tr><th>学科</th><th>评级</th><th>院校</th></tr>
+      <tr><td>管理科学与工程</td><td><span class="grade g-aplus">A+</span></td><td>清华大学、同济大学、国防科技大学</td></tr>
+      <tr><td>工商管理</td><td><span class="grade g-aplus">A+</span></td><td>中国人民大学、清华大学、上海交通大学、中山大学</td></tr>
+    </table>
+    <div class="rank-source" style="margin-top:14px"><b>③ QS 学科排名</b>（Business & Management）· 中国大陆前列：清华大学、北京大学、上海交通大学、复旦大学、浙江大学。</div>
+
+    <h3>💼 就业前景</h3>
+    <div class="jobs">
+      <div class="job"><div class="t">🛒 电商运营</div><div class="d">店铺运营、品类、活动策划</div></div>
+      <div class="job"><div class="t">🌍 跨境电商</div><div class="d">SHEIN、亚马逊、独立站运营</div></div>
+      <div class="job"><div class="t">📊 数据/产品</div><div class="d">数据分析师、产品经理</div></div>
+      <div class="job"><div class="t">📱 新媒体营销</div><div class="d">直播电商、内容营销、达人运营</div></div>
+      <div class="job"><div class="t">🚚 供应链</div><div class="d">物流、仓储、供应链管理</div></div>
+    </div>
+    <p class="companies"><b>代表性用人单位：</b>阿里巴巴（淘宝/天猫）、京东、拼多多、字节跳动（抖音电商）、SHEIN、亚马逊中国、小红书、唯品会、美团、顺丰、菜鸟、各品牌方电商部。</p>
+    <div class="salary">💰 <b>薪资水平：</b>应届起薪分化大，运营岗 8–15 万/年；数据分析/产品岗 12–25 万/年；头部电商平台及跨境独角兽核心岗 20–35 万。电商行业岗位多、晋升快，但工作强度较大。</div>
+  </div>
+
+  <!-- 8. 临床医学 -->
+  <div class="section" id="m8">
+    <h2><span class="badge">08</span> 临床医学</h2>
+    <p class="category">医学门类 / 临床医学类 / 代码 100201K · <code>所属一级学科：临床医学 · 5 年制本科，毕业后需 3 年住院医师规范化培训（规培）</code></p>
+    <p class="overview">培养能够诊治疾病的临床医师。学制长（5+3 或 8 年制本博连读）、培养周期久、社会地位与稳定性高，但学业压力极大、前期收入回报慢。</p>
+
+    <h3>📚 课程体系</h3>
+    <div class="course-group">
+      <div class="label">基础课（医学基础）</div>
+      <div class="tags">
+        <span class="tag basic">系统解剖学</span><span class="tag basic">组织学与胚胎学</span><span class="tag basic">生理学</span>
+        <span class="tag basic">生物化学</span><span class="tag basic">医学微生物学</span><span class="tag basic">免疫学</span>
+        <span class="tag basic">病理学</span><span class="tag basic">病理生理学</span><span class="tag basic">药理学</span>
+        <span class="tag basic">医学统计学</span><span class="tag basic">诊断学</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">专业核心课（临床课）</div>
+      <div class="tags">
+        <span class="tag core">内科学</span><span class="tag core">外科学</span><span class="tag core">妇产科学</span>
+        <span class="tag core">儿科学</span><span class="tag core">神经病学</span><span class="tag core">精神病学</span>
+        <span class="tag core">传染病学</span><span class="tag core">眼科学</span><span class="tag core">耳鼻喉科学</span>
+        <span class="tag core">皮肤性病学</span><span class="tag core">医学影像学</span><span class="tag core">急诊医学</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">方向/规培方向：内科 / 外科 / 妇产科 / 儿科 / 急诊 / 麻醉 / 精神卫生 / 全科</div>
+    </div>
+
+    <h3>🏆 全国排名</h3>
+    <div class="rank-source"><b>① 软科 2024 专业排名 / 中国最好学科排名</b> · 临床医学 Top 院校</div>
+    <table>
+      <tr><th>排名</th><th>院校</th><th>优势</th></tr>
+      <tr><td class="rank">1</td><td>上海交通大学</td><td>瑞金、仁济等附属医院，临床第一</td></tr>
+      <tr><td class="rank">2</td><td>北京协和医学院</td><td>中国医学殿堂，8 年制</td></tr>
+      <tr><td class="rank">3</td><td>复旦大学</td><td>中山、华山医院</td></tr>
+      <tr><td class="rank">4</td><td>北京大学</td><td>北医系，第一/人民/三院</td></tr>
+      <tr><td class="rank">5</td><td>中山大学</td><td>中山医系，华南第一</td></tr>
+      <tr><td>6-10</td><td>四川大学（华西）、浙江大学、华中科技大学（同济）、中南大学（湘雅）、首都医科大学</td><td>—</td></tr>
+    </table>
+    <div class="rank-source" style="margin-top:14px"><b>② 教育部学科评估</b>（临床医学）· 第五轮 A 档院校</div>
+    <table>
+      <tr><th>评级</th><th>院校</th></tr>
+      <tr><td><span class="grade g-aplus">A+</span></td><td>上海交通大学、浙江大学</td></tr>
+      <tr><td><span class="grade g-a">A</span></td><td>北京协和医学院、复旦大学、北京大学、中山大学、四川大学（华西）、华中科技大学（同济）</td></tr>
+      <tr><td><span class="grade g-aminus">A-</span></td><td>中南大学（湘雅）、南京大学、山东大学、首都医科大学、南方医科大学、中国医科大学等</td></tr>
+    </table>
+    <p style="font-size:12px;color:var(--muted);margin-top:6px">注：协和、北医、上医、华西、同济、湘雅、中山医并称"医学七大家"，是临床医学的传统格局。</p>
+    <div class="rank-source" style="margin-top:14px"><b>③ QS 学科排名</b>（Medicine）· 中国大陆前列：上海交通大学、北京大学、复旦大学、清华大学、中山大学、浙江大学。</div>
+
+    <h3>💼 就业前景</h3>
+    <div class="jobs">
+      <div class="job"><div class="t">🏥 临床医师</div><div class="d">各级医院（需执业医师证+规培）</div></div>
+      <div class="job"><div class="t">🔬 医学科研</div><div class="d">高校、研究所、读博深造</div></div>
+      <div class="job"><div class="t">💊 医药企业</div><div class="d">医药代表、医学事务、研发</div></div>
+      <div class="job"><div class="t">🏥 公共卫生</div><div class="d">疾控、卫健委、医保局</div></div>
+    </div>
+    <p class="companies"><b>代表性用人单位：</b>北京协和医院、华西医院、瑞金医院、中山医院、解放军总医院等三甲医院；恒瑞医药、迈瑞医疗、百济神州、药明康德、辉瑞、阿斯利康等医药/器械龙头。</p>
+    <div class="salary">💰 <b>薪资水平：</b>培养周期长、前期低。规培期间 6–10 万/年；主治医师 20–40 万/年；三甲医院副主任医师以上 40–80 万+/年，热门科室（骨科、心外、肿瘤）更高。稳定性与社会地位突出，越老越吃香。</div>
+  </div>
+
+  <!-- 9. 口腔医学 -->
+  <div class="section" id="m9">
+    <h2><span class="badge">09</span> 口腔医学</h2>
+    <p class="category">医学门类 / 口腔医学类 / 代码 100301K · <code>所属一级学科：口腔医学 · 5 年制本科</code></p>
+    <p class="overview">研究牙齿、口腔及颌面部疾病防治的医学分支。被誉为"医学里的金饭碗"——工作强度相对临床轻、医患纠纷少、可自主创业（开诊所）、收入回报较好。</p>
+
+    <h3>📚 课程体系</h3>
+    <div class="course-group">
+      <div class="label">基础课（医学基础）</div>
+      <div class="tags">
+        <span class="tag basic">系统解剖学（含头颈）</span><span class="tag basic">生理学</span><span class="tag basic">生物化学</span>
+        <span class="tag basic">病理学</span><span class="tag basic">药理学</span><span class="tag basic">医学微生物/免疫学</span>
+        <span class="tag basic">诊断学</span><span class="tag basic">口腔解剖生理学</span><span class="tag basic">口腔组织病理学</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">专业核心课</div>
+      <div class="tags">
+        <span class="tag core">牙体牙髓病学</span><span class="tag core">牙周病学</span><span class="tag core">口腔黏膜病学</span>
+        <span class="tag core">口腔颌面外科学</span><span class="tag core">口腔修复学</span><span class="tag core">口腔正畸学</span>
+        <span class="tag core">儿童口腔医学</span><span class="tag core">口腔预防医学</span><span class="tag core">口腔颌面医学影像诊断</span>
+        <span class="tag core">口腔材料学</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">方向/规培方向：口腔内科 / 口腔外科 / 口腔修复 / 口腔正畸 / 儿童口腔</div>
+    </div>
+
+    <h3>🏆 全国排名</h3>
+    <div class="rank-source"><b>① 软科 2024 专业排名</b> · 口腔医学 Top 院校</div>
+    <table>
+      <tr><th>排名</th><th>院校</th><th>优势</th></tr>
+      <tr><td class="rank">1</td><td><b>四川大学（华西口腔）</b></td><td>软科 2024 第一，百年华西，"亚洲第一口腔"</td></tr>
+      <tr><td class="rank">2</td><td>上海交通大学（九院）</td><td>口腔颌面外科顶尖</td></tr>
+      <tr><td class="rank">3</td><td>北京大学（北大口腔）</td><td>北方口腔重镇</td></tr>
+      <tr><td class="rank">4</td><td>武汉大学（武大口腔）</td><td>中部口腔强校</td></tr>
+      <tr><td class="rank">5</td><td>空军军医大学（四医大）</td><td>军医口腔第一</td></tr>
+      <tr><td>6-10</td><td>中山大学、南京医科大学、首都医科大学、华中科技大学、中国医科大学</td><td>—</td></tr>
+    </table>
+    <div class="rank-source" style="margin-top:14px"><b>② 教育部学科评估</b>（口腔医学）· 第五轮 A 档院校</div>
+    <table>
+      <tr><th>评级</th><th>院校</th></tr>
+      <tr><td><span class="grade g-aplus">A+</span></td><td>四川大学（华西）、北京大学、空军军医大学（第四军医大学）、上海交通大学</td></tr>
+      <tr><td><span class="grade g-a">A</span></td><td>武汉大学、中山大学、南京医科大学、首都医科大学</td></tr>
+      <tr><td><span class="grade g-aminus">A-</span></td><td>华中科技大学、中国医科大学、浙江大学、西安交通大学等</td></tr>
+    </table>
+    <div class="rank-source" style="margin-top:14px"><b>③ QS 学科排名</b>（Dentistry）· 中国大陆前列：四川大学（华西，全球前 20）、武汉大学、北京大学、上海交通大学。</div>
+
+    <h3>💼 就业前景</h3>
+    <div class="jobs">
+      <div class="job"><div class="t">🏥 口腔医师</div><div class="d">公立医院口腔科（需执业证+规培）</div></div>
+      <div class="job"><div class="t">🦷 连锁口腔诊所</div><div class="d">民营口腔、高端齿科</div></div>
+      <div class="job"><div class="t">🏪 自主创业</div><div class="d">开设私人牙科诊所</div></div>
+      <div class="job"><div class="t">🔬 科研/教学</div><div class="d">高校、口腔医院研究</div></div>
+    </div>
+    <p class="companies"><b>代表性用人单位：</b>华西口腔医院、北大口腔医院、九院口腔、武大口腔等公立三甲；通策医疗、瑞尔齿科、泰康拜博、欢乐口腔、马泷齿科等连锁口腔；也可自主执业。</p>
+    <div class="salary">💰 <b>薪资水平：</b>口腔是医学里收入回报最快的专业。公立医院主治 20–40 万/年；民营连锁口腔医师 25–60 万/年（正畸、种植更高）；资深医师/合伙人/自开诊所年收入可达百万级。且工作时间相对规律，急诊少。</div>
+  </div>
+
+  <!-- 10. 动物医学 -->
+  <div class="section" id="m10">
+    <h2><span class="badge">10</span> 动物医学</h2>
+    <p class="category">农学门类 / 动物医学类 / 代码 090401 · <code>所属一级学科：兽医学 · 5 年制本科</code></p>
+    <p class="overview">研究动物疾病预防、诊断、治疗与公共卫生的学科。伴随宠物经济爆发（"它经济"），宠物临床兽医成为热门方向，薪资与社会需求双双攀升。</p>
+
+    <h3>📚 课程体系</h3>
+    <div class="course-group">
+      <div class="label">基础课</div>
+      <div class="tags">
+        <span class="tag basic">动物解剖学</span><span class="tag basic">动物组织胚胎学</span><span class="tag basic">动物生理学</span>
+        <span class="tag basic">动物生物化学</span><span class="tag basic">动物病理学</span><span class="tag basic">兽医药理学</span>
+        <span class="tag basic">兽医微生物学</span><span class="tag basic">兽医免疫学</span><span class="tag basic">有机/无机化学</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">专业核心课</div>
+      <div class="tags">
+        <span class="tag core">兽医传染病学</span><span class="tag core">兽医寄生虫学</span><span class="tag core">兽医内科学</span>
+        <span class="tag core">兽医外科学</span><span class="tag core">兽医产科学</span><span class="tag core">中兽医学</span>
+        <span class="tag core">小动物疾病学（宠物）</span><span class="tag core">兽医公共卫生学</span><span class="tag core">动物性食品卫生学</span>
+        <span class="tag core">兽医诊断学</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">方向课：小动物临床（宠物）/ 畜禽 / 兽药 / 公共卫生（人畜共患病）/ 实验动物</div>
+    </div>
+
+    <h3>🏆 全国排名</h3>
+    <div class="rank-source"><b>① 软科 2024 专业排名</b> · 动物医学 Top 代表院校</div>
+    <table>
+      <tr><th>排名</th><th>院校</th><th>优势</th></tr>
+      <tr><td class="rank">1</td><td>中国农业大学</td><td>兽医学科国内顶尖</td></tr>
+      <tr><td class="rank">2</td><td>华中农业大学</td><td>兽医传统强校</td></tr>
+      <tr><td class="rank">3</td><td>南京农业大学</td><td>—</td></tr>
+      <tr><td class="rank">4</td><td>华南农业大学</td><td>华南兽医重镇</td></tr>
+      <tr><td class="rank">5</td><td>扬州大学</td><td>兽医学科突出</td></tr>
+      <tr><td>6-10</td><td>西北农林科技大学、吉林大学、四川农业大学、山东农业大学、东北农业大学</td><td>—</td></tr>
+    </table>
+    <div class="rank-source" style="margin-top:14px"><b>② 教育部学科评估</b>（兽医学）· 第五轮 A 档院校</div>
+    <table>
+      <tr><th>评级</th><th>院校</th></tr>
+      <tr><td><span class="grade g-aplus">A+</span></td><td>中国农业大学、华中农业大学</td></tr>
+      <tr><td><span class="grade g-a">A</span></td><td>华南农业大学、扬州大学</td></tr>
+      <tr><td><span class="grade g-aminus">A-</span></td><td>南京农业大学、西北农林科技大学、吉林大学、东北农业大学、四川农业大学、甘肃农业大学</td></tr>
+    </table>
+    <div class="rank-source" style="margin-top:14px"><b>③ QS 学科排名</b>（Veterinary Science）· 中国大陆前列：中国农业大学、华中农业大学、南京农业大学。</div>
+
+    <h3>💼 就业前景</h3>
+    <div class="jobs">
+      <div class="job"><div class="t">🐕 宠物临床兽医</div><div class="d">犬猫诊疗、专科医师（最热门）</div></div>
+      <div class="job"><div class="t">🐄 畜牧兽医</div><div class="d">养殖场、动保、畜牧集团</div></div>
+      <div class="job"><div class="t">💊 兽药/动保企业</div><div class="d">研发、技术、销售</div></div>
+      <div class="job"><div class="t">🛃 公共卫生</div><div class="d">海关检疫、疾控、食品安全</div></div>
+      <div class="job"><div class="t">🔬 科研/教培</div><div class="d">高校、科研院所</div></div>
+    </div>
+    <p class="companies"><b>代表性用人单位：</b>新瑞鹏宠物医疗集团、瑞派宠物、瑞鹏/芭比堂/美联众合等连锁宠物医院；牧原股份、温氏股份、新希望六和等养殖龙头；中牧股份、瑞普生物、勃林格殷格翰、硕腾（Zoetis）等兽药动保企业；海关、农业农村部、疾控中心。</p>
+    <div class="salary">💰 <b>薪资水平：</b>宠物临床医师应届 8–15 万/年，3–5 年成熟医师 15–40 万/年，专科医师（外科、影像、猫科）更高，资深主治/院长 40–80 万+；畜牧兽医相对稳定 8–18 万。宠物赛道近 5 年薪资涨幅显著，是动医就业的明星方向。</div>
+  </div>
+
+  <!-- 11. 法学 -->
+  <div class="section" id="m11">
+    <h2><span class="badge">11</span> 法学</h2>
+    <p class="category">法学门类 / 法学类 / 代码 030101K · <code>所属一级学科：法学 · "五院四系"传统格局</code></p>
+    <p class="overview">研究法律、法律现象与法治的学科，培养法律职业人才（法官、检察官、律师、法务）。专业地位高，但司法考试通过率低、就业竞争激烈，名校与"五院四系"背景极为关键。</p>
+
+    <h3>📚 课程体系</h3>
+    <div class="course-group">
+      <div class="label">基础课（专业基础，法学无高数）</div>
+      <div class="tags">
+        <span class="tag basic">法理学</span><span class="tag basic">中国法制史</span><span class="tag basic">宪法学</span>
+        <span class="tag basic">民法总论</span><span class="tag basic">刑法学总论</span><span class="tag basic">行政法与行政诉讼法</span>
+        <span class="tag basic">法律逻辑学</span><span class="tag basic">法律文献检索</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">专业核心课（"法学核心 16 门"）</div>
+      <div class="tags">
+        <span class="tag core">民法（物权/合同/侵权）</span><span class="tag core">刑法（分论）</span><span class="tag core">民事诉讼法</span>
+        <span class="tag core">刑事诉讼法</span><span class="tag core">经济法</span><span class="tag core">商法（公司法/票据）</span>
+        <span class="tag core">知识产权法</span><span class="tag core">国际法</span><span class="tag core">国际私法</span>
+        <span class="tag core">国际经济法</span><span class="tag core">劳动与社会保障法</span><span class="tag core">环境资源法</span>
+      </div>
+    </div>
+    <div class="course-group">
+      <div class="label">方向课：民商法 / 刑法 / 经济法 / 国际法 / 知识产权法 / 互联网法 / 涉外法治</div>
+    </div>
+
+    <h3>🏆 全国排名</h3>
+    <div class="rank-source"><b>① 软科 2024 专业排名</b> · 法学 Top 院校</div>
+    <table>
+      <tr><th>排名</th><th>院校</th><th>优势</th></tr>
+      <tr><td class="rank">1</td><td>中国政法大学</td><td>"法大"，法学最高学府</td></tr>
+      <tr><td class="rank">2</td><td>中国人民大学</td><td>人文社科法学顶尖</td></tr>
+      <tr><td class="rank">3</td><td>北京大学</td><td>—</td></tr>
+      <tr><td class="rank">4</td><td>清华大学</td><td>—</td></tr>
+      <tr><td class="rank">5</td><td>华东政法大学</td><td>"华政"，五院四系</td></tr>
+      <tr><td>6-10</td><td>西南政法大学、武汉大学、中南财经政法大学、吉林大学、上海交通大学</td><td>—</td></tr>
+    </table>
+    <div class="rank-source" style="margin-top:14px"><b>② 教育部学科评估</b>（法学）· 第五轮 A 档院校</div>
+    <table>
+      <tr><th>评级</th><th>院校</th></tr>
+      <tr><td><span class="grade g-aplus">A+</span></td><td>中国政法大学、中国人民大学</td></tr>
+      <tr><td><span class="grade g-a">A</span></td><td>北京大学、清华大学、华东政法大学、武汉大学、西南政法大学</td></tr>
+      <tr><td><span class="grade g-aminus">A-</span></td><td>吉林大学、中南财经政法大学、厦门大学、上海交通大学、南京大学、对外经济贸易大学等</td></tr>
+    </table>
+    <p style="font-size:12px;color:var(--muted);margin-top:6px">注："五院四系"——五院：中国政法、华东政法、西南政法、中南财经政法、西北政法；四系：北大、人大、吉大、武大法律系。是法学界传统公认强校。</p>
+    <div class="rank-source" style="margin-top:14px"><b>③ QS 学科排名</b>（Law）· 中国大陆前列：清华大学、北京大学、中国人民大学、中国政法大学、复旦大学、上海交通大学。</div>
+
+    <h3>💼 就业前景</h3>
+    <div class="jobs">
+      <div class="job"><div class="t">⚖️ 律师</div><div class="d">律所执业（需通过法考+实习）</div></div>
+      <div class="job"><div class="t">🏛️ 公检法司</div><div class="d">法官、检察官、公安（需公务员考试）</div></div>
+      <div class="job"><div class="t">🏢 企业法务</div><div class="d">国企、民企、外企法务部</div></div>
+      <div class="job"><div class="t">🏦 金融机构合规</div><div class="d">银行、券商、基金合规风控</div></div>
+      <div class="job"><div class="t">📝 公务员/选调</div><div class="d">党政机关、事业单位</div></div>
+    </div>
+    <p class="companies"><b>代表性用人单位：</b>红圈律所（金杜、君合、中伦、海问、方达、竞天公诚、环球、通商、锦天城、汉坤）；最高法/最高检及各级法院检察院；外交部、商务部等中央机关；腾讯/阿里/华为/字节法务部；中金、中信、四大行合规部。</p>
+    <div class="salary">💰 <b>薪资水平：</b>分化极大。红圈所起薪 2.5–3.5 万/月（年 30–45 万）；普通律所 6–15 万/年；企业法务 12–25 万/年；公务员按级别。法学就业率中等（约 85%），但通过法考（客观题约 30% 通过率）+名校背景后，头部岗位回报丰厚。属"长尾、后劲足"专业。</div>
+  </div>
+
+  <!-- 数据来源 -->
+  <div class="source-box">
+    <h4>📚 数据来源（官方/权威，按重要性排序）</h4>
+    <ul>
+      <li>① <b>软科中国大学专业排名</b>（ShanghaiRanking，2024）：按"专业"精确排名，含评级 A+/A/B+ — <a href="https://www.shanghairanking.cn/rankings/bcmr/2024" target="_blank">shanghairanking.cn/rankings/bcmr/2024</a></li>
+      <li>② <b>教育部学位与研究生教育发展中心（CDGDC）学科评估</b> — 第四轮官方结果：<a href="https://www.cdgdc.edu.cn/dslxkpgjggb/" target="_blank">cdgdc.edu.cn</a>；第五轮官方未完整公开，本报告 A+ 院校系综合各高校披露及权威媒体汇总</li>
+      <li>③ <b>QS 世界大学学科排名</b>（QS World University Rankings by Subject）— <a href="https://www.topuniversities.com/subject-rankings/2026" target="_blank">topuniversities.com</a></li>
+      <li>④ <b>麦可思《中国大学生就业报告》（就业蓝皮书）</b> — 薪资、就业率、绿牌专业数据来源</li>
+      <li>⑤ <b>教育部《普通高等学校本科专业类教学质量国家标准》</b> — 课程体系依据</li>
+      <li>⑥ 各院校官方人才培养方案 / 招生网 — <a href="https://www.tsinghua.edu.cn" target="_blank">清华</a>、<a href="https://www.pku.edu.cn" target="_blank">北大</a>、<a href="https://www.sjtu.edu.cn" target="_blank">上交</a>、<a href="https://www.cupl.edu.cn" target="_blank">中国政法</a>、<a href="https://www.scu.edu.cn" target="_blank">川大华西</a> 等</li>
+    </ul>
+  </div>
+
+  <div class="disclaimer">
+    ⚠️ <b>使用说明与免责声明：</b>
+    ① 本报告用于高考志愿填报参考。② 排名为综合呈现，"排名 1-5"为相对位次，精确名次请以软科官网实时查询为准；同一评级内院校不分先后。③ 第五轮学科评估教育部未完整官方公开，相关数据标注"汇总披露"。④ 薪资为行业区间参考，受城市、院校、个人能力影响巨大，仅供量级判断。⑤ 2026 年 QS 与最新软科排名可能更新，建议填报前核对当年最新数据。
+  </div>
+
+  <p style="text-align:center;color:var(--muted);font-size:12px;margin-top:30px">
+    📅 编制于 2026 年 6 月 · 数据截至 2024–2025 年公开版 · 仅供参考
+  </p>
+
+</div>
+
+</body>
+</html>
